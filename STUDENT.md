@@ -6,13 +6,14 @@ Fill in every field below before your first commit. This file is how instructors
 
 | Field | Your Answer |
 |-------|-------------|
-| Full Name | |
-| GitHub Username | |
-| Email Address | |
-| Phone / WhatsApp | |
+| Full Name | Nwudeh Somtochukwu |
+| GitHub Username | nwudehsomtochukwu-hub |
+| Email Address | nwudehsomtochukwu6@gmail.com |
+| Phone / WhatsApp | +2349135966554 |
 | Cohort | Havilah Club Internship — Cohort |
-| Programme Start Date | |
-| LinkedIn Profile | |
+| Programme Start Date | 07/09/2026|
+| LinkedIn Profile | None |
+| X(Twitter) Profile | https://x.com/EmmanuelMartia |
 
 ---
 
@@ -20,7 +21,7 @@ Fill in every field below before your first commit. This file is how instructors
 
 Write 2–3 sentences describing what you specifically want to be able to do by the end of the 8 weeks.
 
-> Replace this line with your learning objective.
+By the end of this programme, I aim to develop the competence to design and implement automated workflows using n8n and Python, including file handling, data processing, and API integration. I intend to produce clean, well-structured code that addresses practical problems and that I can explain with confidence. My long-term objective is to apply these skills in robotics by designing and building a walking robot.
 
 ---
 

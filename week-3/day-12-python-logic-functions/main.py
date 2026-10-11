@@ -1,43 +1,74 @@
-# Day 12 — Python Logic and Functions
-# Task: Build a Python utility using conditionals, loops, and functions.
-# Submit this script with a working menu system.
+# Day 12 - Python Logic and Functions
 
 
-# ── Function 1: Grade Calculator ─────────────────────────────────────────────
-# Takes a score (0-100) and returns the letter grade.
-# A = 70+, B = 60-69, C = 50-59, D = 40-49, F = below 40
+# Exercise 1: Grade Calculator
 
 def calculate_grade(score):
-    # TODO: implement grade logic
-    pass
+    if score < 0 or score > 100:
+        return "Invalid score"
+    elif score >= 70:
+        return "A"
+    elif score >= 60:
+        return "B"
+    elif score >= 50:
+        return "C"
+    elif score >= 40:
+        return "D"
+    else:
+        return "F"
 
 
-# ── Function 2: Multiplication Table ─────────────────────────────────────────
-# Asks the user to enter a number and prints its full multiplication table (1-12).
-# Repeats until the user types 'quit'.
+# Exercise 2: Multiplication Table
 
 def multiplication_table():
-    # TODO: implement loop and table logic
-    pass
+    again = "yes"
+
+    while again == "yes":
+        try:
+            number = int(input("Enter a whole number: "))
+            for i in range(1, 13):
+                print(number, "x", i, "=", number * i)
+        except ValueError:
+            print("Error: please enter a whole number, not text.")
+
+        again = input("Do you want another table? (yes/no): ").lower()
 
 
-# ── Function 3: Your Choice ───────────────────────────────────────────────────
-# Define a third function of your choice — e.g. calculate_area(), convert_currency(),
-# or check_palindrome().
+# Exercise 3: Temperature Converter
 
-def your_function():
-    # TODO: implement your chosen function
-    pass
+def celsius_to_fahrenheit(celsius):
+    return celsius * 9 / 5 + 32
 
 
-# ── Main Menu ─────────────────────────────────────────────────────────────────
-# Display a simple menu so the user can pick which function to run.
-# Include try/except to handle invalid input (e.g. text entered instead of a number).
+# Exercise 5: Utility Menu
 
-def main():
-    # TODO: build the menu here
-    pass
+running = True
 
+while running:
+    print("\n--- Python Utility Menu ---")
+    print("a. Grade Calculator")
+    print("b. Multiplication Table")
+    print("c. Temperature Converter")
+    print("d. Exit")
 
-if __name__ == "__main__":
-    main()
+    choice = input("Choose an option (a-d): ")
+
+    if choice == "a":
+        try:
+            score = float(input("Enter your score (0-100): "))
+            print("Grade:", calculate_grade(score))
+        except ValueError:
+            print("Error: please enter a number, not text.")
+    elif choice == "b":
+        multiplication_table()
+    elif choice == "c":
+        try:
+            temp_c = float(input("Enter temperature in Celsius: "))
+            print("Temperature in Fahrenheit:", celsius_to_fahrenheit(temp_c))
+        except ValueError:
+            print("Error: please enter a number, not text.")
+    elif choice == "d":
+        print("Goodbye!")
+        running = False
+    else:
+        print("Invalid choice. Please enter a, b, c or d.")

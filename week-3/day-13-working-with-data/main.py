@@ -1,6 +1,4 @@
-# Day 13 — Working With Data
-# Task: Load a CSV, manipulate lists and dicts, clean data, and print a summary.
-# Submit this script along with your original CSV and the output CSV.
+# Day 13 - Working With Data
 
 import csv
 
@@ -8,50 +6,81 @@ INPUT_FILE = "data/sample.csv"
 OUTPUT_FILE = "data/output.csv"
 
 
-# ── Step 1: Load CSV ──────────────────────────────────────────────────────────
-# Open the CSV file using csv.DictReader and read each row into a list of dicts.
+# Step 1: Load CSV
 
 def load_data(filepath):
     rows = []
-    # TODO: open the file and read rows into the list
+    with open(filepath, newline="") as file:
+        reader = csv.DictReader(file)
+        for row in reader:
+            rows.append(row)
     return rows
 
 
-# ── Step 2: Print Summary ─────────────────────────────────────────────────────
-# Print the total number of rows.
-# For any numeric column, print the minimum, maximum, and average values.
+# Step 2: Clean and Convert
+
+def clean_data(rows):
+    for row in rows:
+        row["name"] = row["name"].strip()
+        row["grade"] = row["grade"].strip().upper()
+        row["score"] = int(row["score"])
+    return rows
+
+
+# Step 3: Print Summary
 
 def print_summary(rows):
-    # TODO: implement summary statistics
-    pass
+    scores = []
+    for row in rows:
+        scores.append(row["score"])
+
+    print("--- Data Summary ---")
+    print("Total records:", len(rows))
+    print("Lowest score:", min(scores))
+    print("Highest score:", max(scores))
+    print("Average score:", round(sum(scores) / len(scores), 2))
 
 
-# ── Step 3: Filter Data ───────────────────────────────────────────────────────
-# Return only the rows where a specific column meets a condition.
-# Example: score above 70, or price below 50.
+# Step 4: Filter Data
 
 def filter_data(rows):
     filtered = []
-    # TODO: define and apply your filter condition
+    for row in rows:
+        if row["score"] > 70:
+            filtered.append(row)
     return filtered
 
 
-# ── Step 4: Sort and Export ───────────────────────────────────────────────────
-# Sort the filtered data by one column and write the result to OUTPUT_FILE.
+# Step 5: Sort and Export
+
+def get_score(row):
+    return row["score"]
+
 
 def save_data(rows, filepath):
-    # TODO: sort rows by a column, then write to CSV
-    pass
+    sorted_rows = sorted(rows, key=get_score, reverse=True)
+
+    with open(filepath, "w", newline="") as file:
+        fieldnames = ["name", "score", "grade"]
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        writer.writerows(sorted_rows)
 
 
-# ── Main ──────────────────────────────────────────────────────────────────────
+# Main 
+
 def main():
     rows = load_data(INPUT_FILE)
+    rows = clean_data(rows)
     print_summary(rows)
+
     filtered = filter_data(rows)
+    print("\n--- Students who scored above 70 ---")
+    for row in filtered:
+        print(row["name"], "|", row["score"], "|", row["grade"])
+
     save_data(filtered, OUTPUT_FILE)
-    print(f"Done. {len(filtered)} rows written to {OUTPUT_FILE}")
+    print("\nDone.", len(filtered), "rows written to", OUTPUT_FILE)
 
 
-if __name__ == "__main__":
-    main()
+main()
